@@ -21,3 +21,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

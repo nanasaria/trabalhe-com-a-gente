@@ -102,3 +102,125 @@
 .card:hover {
     background-color: var(--bg-primary);
 }
+
+@media screen and (max-width: 800px) {
+    .card {
+        flex-direction: column;
+        height: 320px;
+        gap: 3px;
+        padding: 3%;
+    }
+
+    .avatar-title {
+        gap: 6px;
+        width: 100%;
+    }
+
+    .avatar-title h2 {
+        font-size: 0.8rem;
+    }
+
+    .picture-avatar {
+        width: 49px;
+        height: 42px;
+    }
+
+    .picture-avatar img {
+        max-height: 38px;
+    }
+
+    .principal-info > p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.6rem;
+        height: 100px;
+        width: 100%;
+        margin-left: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .principal-info > span {
+        gap: 4px;
+        margin-left: 0;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 0.6rem;
+        height: 15px;
+    }
+
+    .topics {
+        display: flex;
+        justify-content: center;
+    }
+
+    .topics ul {
+        width: 90%;
+        height: 30px;
+        justify-items: center;
+        justify-content: center;
+        gap: 3px;
+        font-size: 0.4rem;
+        padding: 0;
+        border: 1px solid var(--color-primary);
+    }
+
+    .topics li {
+        padding: 0;
+    }
+
+    .info-repository {
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
+        gap: 20px;
+        position: absolute;
+        right: 80px;
+        bottom: 80px;
+    }
+
+    .info-repository span {
+        gap: 4px;
+        letter-spacing: 4%;
+        font-size: 0.5rem;
+    }
+
+    .info-repository img {
+        height: 16px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 800px) {
+    .principal-info > p {
+        font-size: 0.8rem;
+    }
+
+    .topics ul {
+        font-size: 0.6rem;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1024px) {
+    .info-repository {
+        font-size: 0.7rem;
+        right: 40px;
+    }
+
+    .info-repository img {
+        height: 30px;
+    }
+
+    .topics {
+        margin-right: 25px;
+    }
+
+    .topics ul {
+        width: 110px;
+        height: 110px;
+        font-size: 0.6rem;
+        padding: 8px;
+    }
+}

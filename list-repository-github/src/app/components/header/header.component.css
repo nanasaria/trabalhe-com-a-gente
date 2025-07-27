@@ -20,3 +20,9 @@ app-search {
     margin-left: 3%;
     margin-right: 8%;
 }
+
+@media screen and (max-width: 600px) {
+    .a > img {
+        height: 25px;
+    }
+}
