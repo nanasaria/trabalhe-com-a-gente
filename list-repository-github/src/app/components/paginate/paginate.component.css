@@ -27,3 +27,8 @@ a:hover {
 .active:hover {
     background-color: transparent;
 }
+
+.not-clickable {
+    pointer-events: none;
+    cursor: default;
+}

@@ -1,13 +1,25 @@
-<div class="list-repository">
+<div
+    [ngClass]="{ 'has-cards': hasCards, 'not-cards': !hasCards }"
+    class="list-repository"
+>
     <header>
         <app-header></app-header>
     </header>
-    <h1>10 Resultados</h1>
+    @if (total_repositories.length > 0) {
+
+    <h1>{{ total_repositories }} Resultados</h1>
+
     <section class="cards">
-        <app-card></app-card>
+        @for (repository of repositories; track $index) {
+        <app-card [repository]="repository"></app-card>
+        }
     </section>
 
     <section class="pagination">
-        <app-paginate></app-paginate>
+        <app-paginate
+            [paginate]="paginate"
+            (eventPage)="getRepositoriesByPaginate($event)"
+        ></app-paginate>
     </section>
+    }
 </div>

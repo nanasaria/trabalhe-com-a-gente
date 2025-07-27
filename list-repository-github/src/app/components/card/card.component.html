@@ -2,29 +2,26 @@
     <section class="principal-info">
         <div class="avatar-title">
             <div class="picture-avatar">
-                <img
-                    src="https://avatars.githubusercontent.com/u/9950313?v=4"
-                    alt="avatar"
-                />
+                <img src="{{ repository.avatar }}" alt="avatar" />
             </div>
 
-            <h2>node js/node</h2>
+            <h2>{{ repository.name }}</h2>
         </div>
-        <p>Node.js JavaScript runtime ✨🐢🚀✨</p>
+        <p>{{ repository.description }}</p>
         <span>
             <img src="assets/icons/language-icon.svg" alt="" />
-            JavaScript
+            {{ repository.language }}
         </span>
     </section>
 
     <section class="topics">
+        @if (repository.topics.length > 0) {
         <ul>
-            <li>nodejs</li>
-            <li>javascript</li>
-            <li>windows</li>
-            <li>macos</li>
-            <li>linux</li>
+            @for (topic of repository.topics; track $index) {
+            <li>{{ topic }}</li>
+            }
         </ul>
+        }
     </section>
 
     <section class="info-repository">
@@ -33,18 +30,18 @@
                 src="assets/icons/star-icon.svg"
                 alt="Quantidade de watchers/estrelas"
             />
-            112k
+            {{ repository.stars }}
         </span>
         <span>
             <img src="assets/icons/fork-icon.svg" alt="Quantidade de forks" />
-            32k
+            {{ repository.forks }}
         </span>
         <span>
             <img
                 src="assets/icons/warning-icon.svg"
                 alt="Quantidade de issues abertas"
             />
-            2k
+            {{ repository.open_issues }}
         </span>
     </section>
 </a>

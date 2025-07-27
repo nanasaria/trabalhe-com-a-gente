@@ -1,6 +1,29 @@
+@if (paginate.length > 0) {
 <span class="paginate">
-    <a class="active">1</a>
-    <a>2</a>
+    @if(paginate[0]?.['first_number']){
+    <a
+        (click)="onChangePage(paginate[0]['first'])"
+        class=""
+        >{{paginate[0]?.['first_number']}}</a
+    >
+    } @if (paginate[0]?.['prev_number'] !== '1') {
+    <a
+        (click)="onChangePage(paginate[0]['prev'])"
+        class=""
+        >{{paginate[0]?.['prev_number']}}</a
+    >
+    }
+
+    <a class="active not-clickable">{{ currentPage }}</a>
+
+    <a
+        (click)="onChangePage(paginate[0]['next'])"
+        >{{ paginate[0]?.['next_number'] }}</a
+    >
     <a>...</a>
-    <a>65</a>
+    <a
+        (click)="onChangePage(paginate[0]['last'])"
+        >{{ paginate[0]?.['last_number'] }}</a
+    >
 </span>
+}

@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Repository } from '../../model/Repository.model';
 
 @Component({
-  selector: 'app-card',
-  standalone: true,
-  imports: [],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+    selector: 'app-card',
+    standalone: true,
+    imports: [],
+    templateUrl: './card.component.html',
+    styleUrl: './card.component.css',
 })
 export class CardComponent {
-
+    @Input() repository!: Repository;
 }

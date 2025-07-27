@@ -17,7 +17,7 @@ export class RepositoriesService {
         );
     }
 
-    getRepositoriesByPaginate(link: string): Observable<any> {
-        return this.http.get(link, { observe: 'response' });
+    getRepositoriesByUrl(url: string): Observable<any> {
+        return this.http.get(url, { observe: 'response' });
     }
 }
