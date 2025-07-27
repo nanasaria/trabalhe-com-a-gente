@@ -1,0 +1,29 @@
+.paginate {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    gap: 15px;
+}
+
+a {
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+}
+
+.active {
+    color: var(--bg-secondary);
+    background-color: var(--color-primary);
+    border-radius: 8px;
+    padding-block: 3%;
+    padding-inline: 8%;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+}
+
+.active:hover {
+    background-color: transparent;
+}

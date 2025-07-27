@@ -1,0 +1,28 @@
+.list-repository {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-secondary);
+}
+
+h1 {
+    margin-top: 5%;
+    color: var(--color-primary);
+}
+
+h1,
+.cards {
+    margin-inline: 15%;
+}
+
+app-card {
+    width: 100%;
+    margin-left: 2%;
+}
+
+app-paginate {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4%;
+}

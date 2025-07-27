@@ -1,0 +1,21 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #0c112d;
+    padding-inline: 10%;
+    gap: 7%;
+}
+
+.home > img {
+    align-items: center;
+    width: 230px;
+    height: 231px;
+}
+
+app-search {
+    width: 100%;
+}
