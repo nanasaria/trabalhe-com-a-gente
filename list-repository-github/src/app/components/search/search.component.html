@@ -2,15 +2,16 @@
     <input
         type="text"
         name="repository"
-        class="input-repository input-repository-lg"
+        class="input-repository"
         id="repository"
         [ngClass]="{
             'input-repository-lg': size === 'lg',
-            'input-repository-md': size === 'md'
+            'input-repository-md': size === 'md',
+            'error-input': !hasParameter
         }"
         [(ngModel)]="repository"
         (keydown.enter)="searchRepository()"
-        placeholder="Pesquise o repositório ou digite um nome"
+        [placeholder]="placeholderText"
     />
     <i class="ph ph-magnifying-glass"></i>
 </div>
