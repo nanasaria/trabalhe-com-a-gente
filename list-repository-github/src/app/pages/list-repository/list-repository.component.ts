@@ -6,6 +6,7 @@ import { RepositoriesService } from '../../services/repositories.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Paginate } from '../../model/Paginate.model';
 import { Repository } from '../../model/Repository.model';
 
 @Component({
@@ -25,7 +26,7 @@ export class ListRepositoryComponent implements OnInit {
     repository: string = '';
     total_repositories: string = '';
     repositories: Repository[] = [];
-    paginate: Array<Record<string, string>> = [];
+    paginate: Paginate[] = [];
     hasCards: boolean = true;
     isLoading: boolean = false;
 
@@ -45,16 +46,16 @@ export class ListRepositoryComponent implements OnInit {
                 .subscribe({
                     next: (res) => {
                         this.total_repositories = this.manipulateNumbers(
-                            Number(res.body.total_count)
+                            res.body.total_count
                         );
 
                         this.repositories = [];
                         this.extractData(res.body.items);
                         this.extractPaginate(res.headers.get('Link'));
-
                         this.isLoading = false;
                     },
                     error: (err) => {
+                        this.isLoading = false;
                         console.error('Erro ao buscar dados: ', err);
                     },
                 });
@@ -62,21 +63,23 @@ export class ListRepositoryComponent implements OnInit {
     }
 
     getRepositoriesByPaginate(url: string): void {
-        console.log(url);
+        this.isLoading = true;
         this.repositoriesService.getRepositoriesByUrl(url).subscribe({
             next: (res) => {
                 this.repositories = [];
                 this.extractData(res.body.items);
                 this.extractPaginate(res.headers.get('Link'));
+                this.isLoading = false;
             },
             error: (err) => {
+                this.isLoading = false;
                 console.error('Erro ao buscar dados: ', err);
             },
         });
     }
 
     extractData(data: any[]): void {
-        const resolve = data.forEach((repository: any) => {
+        data.forEach((repository: any) => {
             if (repository.topics.length > 4) {
                 repository.topics.splice(4);
             }
@@ -89,13 +92,9 @@ export class ListRepositoryComponent implements OnInit {
                 avatar: repository.owner.avatar_url,
                 url: repository.html_url,
                 description: this.verifyDescription(repository.description),
-                stars: this.manipulateNumbers(
-                    Number(repository.stargazers_count)
-                ),
-                open_issues: this.manipulateNumbers(
-                    Number(repository.open_issues)
-                ),
-                forks: this.manipulateNumbers(Number(repository.forks)),
+                stars: this.manipulateNumbers(repository.stargazers_count),
+                open_issues: this.manipulateNumbers(repository.open_issues),
+                forks: this.manipulateNumbers(repository.forks),
                 language: repository.language,
                 topics: repository.topics,
             };
@@ -103,13 +102,14 @@ export class ListRepositoryComponent implements OnInit {
             this.repositories.push(object);
         });
 
-        return resolve;
+        return;
     }
 
-    extractPaginate(link: string): any {
+    extractPaginate(link: string): Paginate | undefined {
         if (!link) {
             this.hasCards = false;
-            return (this.paginate = []);
+            this.paginate = [];
+            return;
         }
 
         const separate = link.split(',');
@@ -134,15 +134,14 @@ export class ListRepositoryComponent implements OnInit {
             links[`${chave}_number`] = item;
         }
 
-        this.paginate = [];
-        this.paginate.push(links);
-        console.log(this.paginate);
+        this.paginate = [links as Paginate];
 
-        return links;
+        console.log(this.paginate);
+        return links as Paginate;
     }
 
-    manipulateNumbers(num: number): string {
-        const number = Math.round(num * 10) / 10;
+    manipulateNumbers(num: string): string {
+        const number = Math.round(Number(num) * 10) / 10;
 
         if (number >= 1000000) return `${Math.round(number / 1000000)}M`;
         if (number >= 100000) return `${Math.round(number / 1000)}K`;
