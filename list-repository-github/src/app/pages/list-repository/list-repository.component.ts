@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { CardComponent } from '../../components/card/card.component';
 import { PaginateComponent } from '../../components/paginate/paginate.component';
 import { RepositoriesService } from '../../services/repositories.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Repository } from '../../model/Repository.model';
@@ -10,7 +11,13 @@ import { Repository } from '../../model/Repository.model';
 @Component({
     selector: 'app-list-repository',
     standalone: true,
-    imports: [HeaderComponent, CardComponent, PaginateComponent, CommonModule],
+    imports: [
+        HeaderComponent,
+        CardComponent,
+        PaginateComponent,
+        CommonModule,
+        MatProgressSpinnerModule,
+    ],
     templateUrl: './list-repository.component.html',
     styleUrl: './list-repository.component.css',
 })
@@ -20,6 +27,7 @@ export class ListRepositoryComponent implements OnInit {
     repositories: Repository[] = [];
     paginate: Array<Record<string, string>> = [];
     hasCards: boolean = true;
+    isLoading: boolean = false;
 
     constructor(
         private repositoriesService: RepositoriesService,
@@ -29,6 +37,8 @@ export class ListRepositoryComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.subscribe((param) => {
             this.repository = param['repository'];
+
+            this.isLoading = true;
 
             this.repositoriesService
                 .getRepositories(this.repository)
@@ -41,6 +51,8 @@ export class ListRepositoryComponent implements OnInit {
                         this.repositories = [];
                         this.extractData(res.body.items);
                         this.extractPaginate(res.headers.get('Link'));
+
+                        this.isLoading = false;
                     },
                     error: (err) => {
                         console.error('Erro ao buscar dados: ', err);
@@ -65,8 +77,8 @@ export class ListRepositoryComponent implements OnInit {
 
     extractData(data: any[]): void {
         const resolve = data.forEach((repository: any) => {
-            if (repository.topics.length > 5) {
-                repository.topics.splice(5);
+            if (repository.topics.length > 4) {
+                repository.topics.splice(4);
             }
 
             const object = {

@@ -1,3 +1,4 @@
+@if (!isLoading) {
 <div
     [ngClass]="{ 'has-cards': hasCards, 'not-cards': !hasCards }"
     class="list-repository"
@@ -23,3 +24,9 @@
     </section>
     }
 </div>
+}@else {
+<div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+}
