@@ -224,3 +224,22 @@
         padding: 8px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .avatar-title h2 {
+        font-size: 0.65rem;
+    }
+
+    .info-repository {
+        font-size: 0.6rem;
+        right: 40px;
+    }
+
+    .principal-info > p {
+        font-size: 0.45rem;
+    }
+
+    .topics ul {
+        font-size: 0.45rem;
+    }
+}
