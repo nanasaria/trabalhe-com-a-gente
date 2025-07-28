@@ -126,6 +126,12 @@ export class ListRepositoryComponent implements OnInit {
             links[name] = url;
         }
 
+        if (Object.keys(links).length === 0) {
+            this.hasCards = false;
+            this.paginate = [];
+            return;
+        }
+
         for (const [chave, valor] of Object.entries(links)) {
             const item = (valor as string)
                 .replace('page=5', '')
@@ -136,7 +142,6 @@ export class ListRepositoryComponent implements OnInit {
 
         this.paginate = [links as Paginate];
 
-        console.log(this.paginate);
         return links as Paginate;
     }
 
@@ -144,7 +149,6 @@ export class ListRepositoryComponent implements OnInit {
         const number = Math.round(Number(num) * 10) / 10;
 
         if (number >= 1000000) return `${Math.round(number / 1000000)}M`;
-        if (number >= 100000) return `${Math.round(number / 1000)}K`;
         if (number >= 1000) return `${Math.round(number / 1000)}K`;
 
         return number.toString();
